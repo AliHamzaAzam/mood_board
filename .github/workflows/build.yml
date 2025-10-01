@@ -32,10 +32,26 @@ jobs:
         working-directory: ./electron-app
         run: pnpm install --no-frozen-lockfile
       
-      - name: Install Electron (manual postinstall)
+      - name: Install Electron (manual postinstall) - Unix
+        if: runner.os != 'Windows'
         working-directory: ./electron-app
+        shell: bash
         run: |
-          cd node_modules/.pnpm/electron@*/node_modules/electron 2>/dev/null && node install.js || echo "Electron already installed"
+          ELECTRON_PATH=$(find node_modules/.pnpm -type d -path "*/electron@*/node_modules/electron" 2>/dev/null | head -1)
+          if [ -n "$ELECTRON_PATH" ] && [ -f "$ELECTRON_PATH/install.js" ]; then
+            cd "$ELECTRON_PATH" && node install.js
+          fi
+      
+      - name: Install Electron (manual postinstall) - Windows
+        if: runner.os == 'Windows'
+        working-directory: ./electron-app
+        shell: pwsh
+        run: |
+          $electronPath = Get-ChildItem -Path "node_modules\.pnpm" -Recurse -Filter "install.js" | Where-Object { $_.FullName -match "electron@.*\\node_modules\\electron\\install.js" } | Select-Object -First 1
+          if ($electronPath) {
+            Set-Location (Split-Path $electronPath.FullName)
+            node install.js
+          }
       
       - name: Build Electron app (macOS)
         if: matrix.os == 'macos-latest'
