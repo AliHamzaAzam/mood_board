@@ -13,6 +13,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "postinstall": "electron-builder install-app-deps",
     "dev": "vite",
     "build": "vite build",
     "build:web": "vite build --config vite.config.web.js",
