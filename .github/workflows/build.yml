@@ -32,6 +32,11 @@ jobs:
         working-directory: ./electron-app
         run: pnpm install --no-frozen-lockfile
       
+      - name: Install Electron (manual postinstall)
+        working-directory: ./electron-app
+        run: |
+          cd node_modules/.pnpm/electron@*/node_modules/electron 2>/dev/null && node install.js || echo "Electron already installed"
+      
       - name: Build Electron app (macOS)
         if: matrix.os == 'macos-latest'
         working-directory: ./electron-app

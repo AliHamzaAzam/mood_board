@@ -1,5 +1,6 @@
 {
-  "buildCommand": "cd electron-app && pnpm install && pnpm run build:web",
+  "buildCommand": "npm install -g pnpm && cd electron-app && pnpm install && pnpm run build:web",
   "outputDirectory": "electron-app/dist-web",
-  "framework": "vite"
+  "framework": "vite",
+  "installCommand": "echo 'Skipping default install'"
 }
