@@ -283,13 +283,6 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ---
 
-## 👨‍💻 Author
-
-**Azalea**
-- GitHub: [@azaleas](https://github.com/azaleas)
-
----
-
 ## 🙏 Acknowledgments
 
 - Icons by [Lucide](https://lucide.dev/)
