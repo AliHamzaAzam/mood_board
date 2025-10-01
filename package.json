@@ -1,4 +1,14 @@
 {
+	"name": "mood-board-workspace",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Mood Board workspace",
+	"scripts": {
+		"dev": "pnpm --filter september-dashboard dev",
+		"build:web": "pnpm --filter september-dashboard build:web",
+		"electron:dev": "pnpm --filter september-dashboard electron:dev",
+		"electron:build": "pnpm --filter september-dashboard electron:build"
+	},
 	"dependencies": {
 		"lucide-react": "^0.544.0",
 		"react": "^19.1.1"
