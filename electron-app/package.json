@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "Polished glassmorphism productivity dashboard with mood board, calendar, and focus tools",
   "main": "electron/main.js",
-  "author": "Azalea",
+  "author": {
+    "name": "Ali Hamza Azam",
+    "email": "azaleasazam@icloud.com"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/azaleas/mood_board"
+    "url": "https://github.com/AliHamzaAzam/mood_board"
   },
   "license": "MIT",
   "scripts": {

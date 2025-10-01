@@ -57,26 +57,26 @@ Get the native desktop app for the best experience with data persistence and sys
 ### 🍎 macOS
 ```bash
 # Download the DMG file
-curl -L -o SeptemberDashboard.dmg https://github.com/azaleas/mood_board/releases/latest/download/September-Dashboard-1.0.0.dmg
+curl -L -o SeptemberDashboard.dmg https://github.com/AliHamzaAzam/mood_board/releases/latest/download/September-Dashboard-1.0.0.dmg
 
 # Or download manually:
 ```
-**[Download September Dashboard.dmg](https://github.com/azaleas/mood_board/releases/latest)** → Open and drag to Applications
+**[Download September Dashboard.dmg](https://github.com/AliHamzaAzam/mood_board/releases/latest)** → Open and drag to Applications
 
 ### 🪟 Windows
-**[Download September-Dashboard-Setup.exe](https://github.com/azaleas/mood_board/releases/latest)** → Run the installer
+**[Download September-Dashboard-Setup.exe](https://github.com/AliHamzaAzam/mood_board/releases/latest)** → Run the installer
 
 ### 🐧 Linux
-- **AppImage** (Universal): [Download .AppImage](https://github.com/azaleas/mood_board/releases/latest)
+- **AppImage** (Universal): [Download .AppImage](https://github.com/AliHamzaAzam/mood_board/releases/latest)
   ```bash
   chmod +x September-Dashboard-*.AppImage
   ./September-Dashboard-*.AppImage
   ```
-- **Debian/Ubuntu**: [Download .deb](https://github.com/azaleas/mood_board/releases/latest)
+- **Debian/Ubuntu**: [Download .deb](https://github.com/AliHamzaAzam/mood_board/releases/latest)
   ```bash
   sudo dpkg -i september-dashboard_*.deb
   ```
-- **Snap**: [Download .snap](https://github.com/azaleas/mood_board/releases/latest)
+- **Snap**: [Download .snap](https://github.com/AliHamzaAzam/mood_board/releases/latest)
   ```bash
   sudo snap install september-dashboard_*.snap --dangerous
   ```
@@ -118,7 +118,7 @@ curl -L -o SeptemberDashboard.dmg https://github.com/azaleas/mood_board/releases
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/azaleas/mood_board.git
+   git clone https://github.com/AliHamzaAzam/mood_board.git
    cd mood_board/electron-app
    ```
 
@@ -218,7 +218,7 @@ mood_board/
 4. **Wait for GitHub Actions** (~10-15 minutes)
    - Builds are created for macOS, Windows, and Linux
    - A new release is published automatically
-   - Downloads are available at: `https://github.com/azaleas/mood_board/releases/latest`
+   - Downloads are available at: `https://github.com/AliHamzaAzam/mood_board/releases/latest`
 
 ### Manual Local Build
 
