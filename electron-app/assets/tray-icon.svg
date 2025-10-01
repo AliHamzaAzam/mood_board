@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simple autumn leaf for tray -->
+  <path d="M32 8 L32 52 C32 52, 20 44, 16 40 C12 36, 10 28, 16 24 C22 20, 28 24, 32 28" 
+        fill="#f59e0b" stroke="#ea580c" stroke-width="2"/>
+  <path d="M32 8 L32 52 C32 52, 44 44, 48 40 C52 36, 54 28, 48 24 C42 20, 36 24, 32 28" 
+        fill="#f59e0b" stroke="#ea580c" stroke-width="2"/>
+  <path d="M32 12 L32 52" stroke="#dc2626" stroke-width="3"/>
+</svg>

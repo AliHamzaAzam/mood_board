@@ -1,0 +1,44 @@
+node_modules/
+dist/
+dist-electron/
+.vite/
+.electron-builder/
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.swp
+*.swo
+*~
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.local
+*.cache
+
+# Environment
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# Electron
+out/
+*.dmg
+*.exe
+*.AppImage
+*.deb
+*.snap

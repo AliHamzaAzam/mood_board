@@ -1,0 +1,520 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+.animate-rain-fall {
+  animation: rain-fall linear infinite;
+}
+
+.animate-leaf-fall {
+  animation: leaf-fall linear infinite;
+}
+
+.animate-snow-fall {
+  animation: snow-fall linear infinite;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Custom scrollbar for playlist */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 115, 22, 0.5);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 115, 22, 0.7);
+}
+
+/* Electron draggable region */
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(100vh) rotate(180deg);
+    opacity: 0.3;
+  }
+}
+
+.animate-float {
+  animation: float linear infinite;
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
+
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+/* Prevent text selection during drag */
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.select-text {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Cursor styles for dragging */
+.cursor-grab {
+  cursor: grab;
+  cursor: -webkit-grab;
+}
+
+/* Enhanced background animations */
+/* Cloud movements */
+@keyframes float-cloud {
+  0% {
+    transform: translateX(-10%) translateY(0);
+  }
+  100% {
+    transform: translateX(110%) translateY(-20px);
+  }
+}
+
+/* Rain drops */
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Leaf falling - natural swaying motion */
+@keyframes leaf-fall {
+  0% {
+    transform: translateY(-50px) translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  10% {
+    transform: translateY(10vh) translateX(15px) rotate(36deg);
+  }
+  20% {
+    transform: translateY(20vh) translateX(25px) rotate(72deg);
+  }
+  30% {
+    transform: translateY(30vh) translateX(20px) rotate(108deg);
+  }
+  40% {
+    transform: translateY(40vh) translateX(0px) rotate(144deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(-20px) rotate(180deg);
+  }
+  60% {
+    transform: translateY(60vh) translateX(-25px) rotate(216deg);
+  }
+  70% {
+    transform: translateY(70vh) translateX(-15px) rotate(252deg);
+  }
+  80% {
+    transform: translateY(80vh) translateX(0px) rotate(288deg);
+  }
+  90% {
+    transform: translateY(90vh) translateX(10px) rotate(324deg);
+  }
+  97% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) translateX(5px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Snow fall */
+@keyframes snow-fall {
+  0% {
+    transform: translateY(-100px) translateX(0) rotate(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(100vh) translateX(50px) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Stars twinkling */
+@keyframes star-twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Sun rays */
+@keyframes sun-rays {
+  0% {
+    transform: rotate(0deg);
+    opacity: 0.4;
+  }
+  100% {
+    transform: rotate(360deg);
+    opacity: 0.2;
+  }
+}
+
+/* Lightning flash */
+@keyframes lightning {
+  0%, 10%, 20%, 100% {
+    opacity: 0;
+  }
+  5%, 15% {
+    opacity: 0.8;
+  }
+}
+
+/* Fog drift */
+@keyframes fog-drift {
+  0% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(50%) translateY(10px);
+    opacity: 0.3;
+  }
+}
+
+/* Pixel cloud movement */
+@keyframes pixel-float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-15px) translateX(10px);
+  }
+}
+
+/* Gentle ambient movement */
+@keyframes ambient-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -10px) scale(1.05);
+  }
+  50% {
+    transform: translate(-10px, -20px) scale(1);
+  }
+  75% {
+    transform: translate(-20px, 10px) scale(1.05);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.animate-float-cloud {
+  animation: float-cloud linear infinite;
+}
+
+.animate-rain-fall {
+  animation: rain-fall linear infinite;
+}
+
+.animate-leaf-fall {
+  animation: leaf-fall linear infinite;
+}
+
+.animate-snow-fall {
+  animation: snow-fall linear infinite;
+}
+
+.animate-star-twinkle {
+  animation: star-twinkle 3s ease-in-out infinite;
+}
+
+.animate-sun-rays {
+  animation: sun-rays 60s linear infinite;
+}
+
+.animate-lightning {
+  animation: lightning 4s ease-in-out infinite;
+}
+
+.animate-fog-drift {
+  animation: fog-drift 20s ease-in-out infinite;
+}
+
+.animate-pixel-float {
+  animation: pixel-float 8s ease-in-out infinite;
+}
+
+.animate-ambient-drift {
+  animation: ambient-drift 25s ease-in-out infinite;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+/* Prevent text selection during active drag */
+.dragging * {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  pointer-events: none !important;
+}
+
+/* Custom Titlebar Styles */
+.titlebar-mac {
+  -webkit-app-region: drag;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 183, 77, 0.15), rgba(255, 138, 101, 0.15));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  user-select: none;
+  z-index: 9999;
+}
+
+.titlebar-windows {
+  -webkit-app-region: drag;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(255, 183, 77, 0.15), rgba(255, 138, 101, 0.15));
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0 8px;
+  user-select: none;
+}
+
+.titlebar-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(139, 92, 46, 0.9);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+}
+
+/* macOS Traffic Lights */
+.traffic-lights {
+  -webkit-app-region: no-drag;
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  z-index: 10000;
+}
+
+.traffic-light {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.traffic-light .symbol {
+  opacity: 0;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+  transition: opacity 0.15s ease;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.traffic-light:hover .symbol {
+  opacity: 1;
+}
+
+.traffic-light.close {
+  background-color: #ff5f57;
+  border: 0.5px solid #e0443e;
+}
+
+.traffic-light.minimize {
+  background-color: #ffbd2e;
+  border: 0.5px solid #dfa123;
+}
+
+.traffic-light.maximize {
+  background-color: #28ca42;
+  border: 0.5px solid #1aab29;
+}
+
+.traffic-light:hover {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+}
+
+.traffic-light:active {
+  transform: scale(0.95);
+}
+
+/* Windows Controls */
+.window-controls {
+  -webkit-app-region: no-drag;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: auto;
+}
+
+.control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(139, 92, 46, 0.8);
+  transition: all 0.15s ease;
+}
+
+.control-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.control-button:active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.control-button.close-btn:hover {
+  background: #e81123;
+  color: white;
+}
+
+.control-button.close-btn:active {
+  background: #c50f1f;
+  color: white;
+}
+
+/* Prevent icon selection */
+.control-button svg,
+.traffic-light svg {
+  pointer-events: none;
+}
