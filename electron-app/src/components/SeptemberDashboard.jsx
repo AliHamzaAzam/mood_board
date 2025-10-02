@@ -118,6 +118,41 @@ export default function SeptemberDashboard() {
   const [hoveredNote, setHoveredNote] = useState(null);
   const [rotatingNote, setRotatingNote] = useState(null);
   const [resizingNote, setResizingNote] = useState(null);
+  // Precompute leaf elements with useMemo so hooks aren't called conditionally
+  const leafElements = useMemo(() => {
+    try {
+      const leafCount = draggedNote ? 3 : 6;
+      const leafEmojis = ['🍂', '🍁'];
+
+      return [...Array(leafCount)].map((_, i) => {
+        const randomLeaf = leafEmojis[i % 2];
+        const leftPosition = (i * 17 + 10) % 100; // Distribute evenly
+        const fontSize = 16 + (i % 3) * 4; // Vary sizes: 16, 20, 24
+        const delay = i * 4; // Stagger by 4 seconds each
+        const duration = 25 + (i % 3) * 5; // Vary: 25s, 30s, 35s
+
+        return (
+          <div
+            key={`leaf-${i}`}
+            className="absolute animate-leaf-fall"
+            style={{
+              left: `${leftPosition}%`,
+              top: '-50px',
+              fontSize: `${fontSize}px`,
+              animationDelay: `${delay}s`,
+              animationDuration: `${duration}s`,
+              willChange: 'transform',
+              pointerEvents: 'none'
+            }}
+          >
+            {randomLeaf}
+          </div>
+        );
+      });
+    } catch (e) {
+      return null;
+    }
+  }, [draggedNote]);
   const [showSettings, setShowSettings] = useState(false);
   const [showStatistics, setShowStatistics] = useState(false);
   const [celebration, setCelebration] = useState(0);
@@ -920,7 +955,7 @@ export default function SeptemberDashboard() {
   // YouTube Player Controls
   const togglePlay = () => {
     if (!playerReady || !youtubePlayerRef.current) {
-      console.log('Player not ready yet');
+      console.warn('Player not ready yet');
       return;
     }
     
@@ -984,51 +1019,46 @@ export default function SeptemberDashboard() {
     }
   };
 
+  const addNote = () => {
+    if (!newNoteText || !newNoteText.trim()) return;
+
+    const maxZ = moodNotes.length ? Math.max(...moodNotes.map(n => n.zIndex || 0)) : 0;
+    const newNote = {
+      id: Date.now(),
+      x: 10,
+      y: 10,
+      text: newNoteText,
+      color: selectedColor || 'bg-yellow-200',
+      rotation: 0,
+      zIndex: maxZ + 1,
+    };
+
+    const newNotes = [...moodNotes, newNote];
+    setMoodNotes(newNotes);
+    saveToHistory(newNotes);
+    setNewNoteText('');
+    setShowNoteInput(false);
+
+    // Send notification
+    if (typeof sendNotification === 'function') {
+      sendNotification('📝 Note Added', `${newNote.text.slice(0, 50)}${newNote.text.length > 50 ? '...' : ''}`);
+    }
+  };
+
+  const deleteNote = (id) => {
+    const newNotes = moodNotes.filter(note => note.id !== id);
+    setMoodNotes(newNotes);
+    saveToHistory(newNotes);
+  };
+
+  // Alias used by UI handlers
+  const addMoodNote = () => addNote();
+
   const redo = () => {
     if (historyIndex < noteHistory.length - 1) {
       setHistoryIndex(historyIndex + 1);
       setMoodNotes(JSON.parse(JSON.stringify(noteHistory[historyIndex + 1])));
     }
-  };
-
-  // Initialize history
-  useEffect(() => {
-    if (noteHistory.length === 0) {
-      saveToHistory(moodNotes);
-    }
-  }, []);
-
-  const addMoodNote = () => {
-    if (newNoteText.trim()) {
-      const randomRotation = Math.random() * 6 - 3; // -3 to 3 degrees
-      const randomX = Math.random() * 70 + 5;
-      const randomY = Math.random() * 60 + 5;
-      const maxZIndex = moodNotes.length > 0 ? Math.max(...moodNotes.map(n => n.zIndex || 10)) : 10;
-      
-      const newNotes = [...moodNotes, {
-        id: Date.now(),
-        text: newNoteText,
-        x: randomX,
-        y: randomY,
-        color: selectedColor,
-        rotation: randomRotation,
-        width: 200,
-        height: 150,
-        zIndex: maxZIndex + 1
-      }];
-      
-      setMoodNotes(newNotes);
-      saveToHistory(newNotes);
-      setNewNoteText('');
-      setShowNoteInput(false);
-      
-      // Send notification
-      sendNotification('📝 Note Added', `"${newNoteText.slice(0, 50)}${newNoteText.length > 50 ? '...' : ''}"`);
-    }
-  };  const deleteNote = (id) => {
-    const newNotes = moodNotes.filter(note => note.id !== id);
-    setMoodNotes(newNotes);
-    saveToHistory(newNotes);
   };
 
   const updateNoteText = (id, newText) => {
@@ -1759,36 +1789,7 @@ export default function SeptemberDashboard() {
         {/* Optional autumn leaves (if enabled in settings) */}
         {appSettings.fallingLeavesEnabled && (
           <>
-            {useMemo(() => {
-              const leafCount = draggedNote ? 3 : 6;
-              const leafEmojis = ['🍂', '🍁'];
-              
-              return [...Array(leafCount)].map((_, i) => {
-                const randomLeaf = leafEmojis[i % 2];
-                const leftPosition = (i * 17 + 10) % 100; // Distribute evenly
-                const fontSize = 16 + (i % 3) * 4; // Vary sizes: 16, 20, 24
-                const delay = i * 4; // Stagger by 4 seconds each
-                const duration = 25 + (i % 3) * 5; // Vary: 25s, 30s, 35s
-                
-                return (
-                  <div
-                    key={`leaf-${i}`}
-                    className="absolute animate-leaf-fall"
-                    style={{
-                      left: `${leftPosition}%`,
-                      top: '-50px',
-                      fontSize: `${fontSize}px`,
-                      animationDelay: `${delay}s`,
-                      animationDuration: `${duration}s`,
-                      willChange: 'transform',
-                      pointerEvents: 'none'
-                    }}
-                  >
-                    {randomLeaf}
-                  </div>
-                );
-              });
-            }, [draggedNote])}
+            {leafElements}
           </>
         )}
 

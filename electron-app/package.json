@@ -1,6 +1,8 @@
 {
   "name": "september-dashboard",
   "version": "1.0.0",
+  "type": "module",
+  "packageManager": "pnpm@9.0.0",
   "description": "Polished glassmorphism productivity dashboard with mood board, calendar, and focus tools",
   "main": "electron/main.js",
   "author": {
