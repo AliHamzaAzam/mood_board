@@ -1,5 +1,6 @@
 {
-  "buildCommand": "cd electron-app && npm install -g pnpm@10 && pnpm install --frozen-lockfile && pnpm run build:web",
+  "installCommand": "cd electron-app && npm install -g pnpm@10 && pnpm install --frozen-lockfile",
+  "buildCommand": "cd electron-app && pnpm run build:web",
   "outputDirectory": "electron-app/dist-web",
   "framework": "vite"
 }
