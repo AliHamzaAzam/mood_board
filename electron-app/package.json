@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "electron-store": "^8.1.0",
+    "ajv": "8.17.1",
     "jspdf": "^3.0.3",
     "lucide-react": "^0.544.0",
     "react": "^18.3.1",
@@ -66,7 +67,10 @@
     "files": [
       "dist/**/*",
       "electron/**/*",
-      "assets/**/*"
+  "assets/**/*",
+  "node_modules/electron-store/**/*",
+      "node_modules/conf/**/*",
+      "node_modules/type-fest/**/*"
     ],
     "mac": {
       "category": "public.app-category.productivity",

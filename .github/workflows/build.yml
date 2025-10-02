@@ -26,15 +26,23 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 10
+
+      - name: Check pnpm version
+        run: pnpm --version
       
       - name: Install dependencies
         working-directory: ./electron-app
-        run: pnpm install --no-frozen-lockfile
+        # Use frozen lockfile to ensure deterministic installs (matches repo pnpm-lock.yaml)
+        run: pnpm install --frozen-lockfile
       
       - name: Build Electron app (macOS)
         if: matrix.os == 'macos-latest'
         working-directory: ./electron-app
+        # For CI signing/notarization, set these secrets in repository settings and uncomment:
+        # env:
+        #  CSC_LINK: ${{ secrets.CSC_LINK }}
+        #  CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
         run: pnpm run electron:build:mac
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
