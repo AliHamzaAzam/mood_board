@@ -1,3 +1,11 @@
 {
-  "rootDirectory": "electron-app"
+  "installCommand": "cd electron-app && npm install -g pnpm@9.0.0 && sleep 2 && pnpm install --frozen-lockfile",
+  "buildCommand": "cd electron-app && pnpm run build:web",
+  "outputDirectory": "electron-app/dist-web",
+  "framework": "vite",
+  "functions": {
+    "app/api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }
